@@ -224,9 +224,9 @@ public class CustomTextView extends LinearLayout implements ValidityBase, Server
         checkServerContinuously = false;
         validityAnimation.setVisibility(GONE);
         validity = success;
-//        if (mValidityListener != null) {
-//            mValidityListener.checkValidity();
-//        }
+        if (mValidityListener != null) {
+            mValidityListener.checkValidity();
+        }
         showValidityResponse();
     }
 

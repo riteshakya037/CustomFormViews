@@ -64,7 +64,7 @@
             android:hint="Text"
             android:inputType="textCapWords"
             android:letterSpacing="0.044"
-            android:maxLength="1"
+            android:maxLines="1"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:textColorHint="@color/colorHeather"

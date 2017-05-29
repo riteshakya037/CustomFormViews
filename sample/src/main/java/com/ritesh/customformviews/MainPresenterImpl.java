@@ -102,8 +102,7 @@ class MainPresenterImpl extends ValidityClassBase implements CustomTextView.Focu
 
     @Override
     public void finalValidity(boolean allValid) {
-        if (allValid)
-            Toast.makeText(mView.getContext(), "Congrats", Toast.LENGTH_LONG).show();
+        mView.setNextButton(allValid);
     }
 
     @Override
