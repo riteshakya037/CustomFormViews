@@ -20,7 +20,7 @@ apply plugin: 'com.jfrog.bintray'
 
 // change all of these as necessary
 ext {
-    bintrayRepo = 'Views'
+    bintrayRepo = 'maven'
     bintrayName = 'customfieldviews'
 
     publishedGroupId = 'com.ritesh'
@@ -33,7 +33,7 @@ ext {
     gitUrl = 'https://github.com/riteshakya037/CustomFormViews.git'
     gitIssueUrl = 'https://github.com/riteshakya037/CustomFormViews/issues'
 
-    libraryVersion = '1.0.1'
+    libraryVersion = '1.0.0'
 
     developerId = 'riteshakya037'
     developerName = 'Ritesh Shakya'
