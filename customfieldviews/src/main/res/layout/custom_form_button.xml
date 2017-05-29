@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="55dp"
+    android:layout_height="55dp"
+    android:background="@drawable/border_background_light">
+
+    <ImageView
+        android:id="@+id/custom_form_button.button_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_chevron_down_dropdown"
+        tools:ignore="ContentDescription" />
+</RelativeLayout>

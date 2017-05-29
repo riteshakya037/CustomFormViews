@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="custom_view">
+        <attr name="hint" format="string" />
+        <attr name="text" format="string" />
+        <attr name="title" format="string" />
+        <attr name="editable" format="boolean" />
+        <attr name="password" format="boolean" />
+        <attr name="android:inputType" />
+        <attr name="android:entries" />
+    </declare-styleable>
+    <declare-styleable name="FormButton">
+        <attr name="buttonIcon" format="reference" />
+    </declare-styleable></resources>

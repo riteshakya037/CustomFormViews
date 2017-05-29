@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:layout_marginTop="16dp"
+    android:background="@drawable/border_background"
+    android:focusable="false">
+
+    <LinearLayout
+        android:id="@+id/custom_date_view_text_hint_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="4dp"
+        android:visibility="visible"
+        tools:ignore="RtlHardcoded,UseCompoundDrawables">
+
+        <ImageView
+            android:id="@+id/custom_date_view_validity_icon"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_check_green"
+            tools:ignore="ObsoleteLayoutParam" />
+
+        <TextView
+            android:id="@+id/custom_date_view_text_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="4dp"
+            android:gravity="center"
+            android:text="@string/hint_text"
+            android:textSize="12.7sp"
+            tools:ignore="ObsoleteLayoutParam" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/custom_date_view.text_main"
+        style="@style/FrameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/custom_date_view_text_hint_layout"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:hint="@string/hint_text"
+        android:letterSpacing="0.044"
+        android:textColorHint="@color/colorHeather"
+        tools:ignore="UnusedAttribute" />
+
+    <com.ritesh.customfieldviews.FormButton
+        android:id="@+id/custom_date_view.drop_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        app:buttonIcon="@drawable/ic_calendar"
+        tools:ignore="RelativeOverlap,RtlHardcoded" />
+</RelativeLayout>

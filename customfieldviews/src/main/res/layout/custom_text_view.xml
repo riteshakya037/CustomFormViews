@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:orientation="vertical">
+
+    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/border_background"
+        android:focusable="false">
+
+        <LinearLayout
+            android:id="@+id/custom_text_view_text_hint_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="4dp"
+            android:visibility="gone"
+            tools:ignore="RtlHardcoded,UseCompoundDrawables">
+
+            <ImageView
+                android:id="@+id/custom_text_view_validity_icon"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/ic_error"
+                android:visibility="visible"
+                tools:ignore="ObsoleteLayoutParam" />
+
+            <com.wang.avi.AVLoadingIndicatorView
+                android:id="@+id/custom_text_view_validity_animation"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_alignParentTop="true"
+                android:visibility="gone"
+                app:indicatorColor="@color/colorHeather"
+                tools:ignore="ObsoleteLayoutParam" />
+
+            <TextView
+                android:id="@+id/custom_text_view_text_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="4dp"
+                android:gravity="center"
+                android:text="@string/hint_text"
+                android:textColor="@color/colorHeather"
+                android:textSize="12.7sp"
+                tools:ignore="ObsoleteLayoutParam" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/custom_text_view_text_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/custom_text_view_text_hint_layout"
+            android:background="@android:color/transparent"
+            android:capitalize="sentences"
+            android:gravity="center_vertical"
+            android:hint="Text"
+            android:inputType="textCapWords"
+            android:letterSpacing="0.044"
+            android:maxLength="1"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textColorHint="@color/colorHeather"
+            android:textSize="16.7sp"
+            tools:ignore="UnusedAttribute" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/custom_text_view_error_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp"
+        android:text="Error"
+        android:visibility="gone" />
+</LinearLayout>

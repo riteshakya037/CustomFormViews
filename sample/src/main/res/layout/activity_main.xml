@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp"
+    tools:context="com.ritesh.customformviews.MainActivity">
+
+    <com.ritesh.customfieldviews.CustomTextView
+        android:id="@+id/activity_main_text_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        app:hint="Email" />
+
+    <com.ritesh.customfieldviews.CustomSpinnerView
+        android:id="@+id/activity_main_number_of_dependents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/number_of_dependents"
+        app:hint="No. of Dependents" />
+
+    <com.ritesh.customfieldviews.CustomSpinnerView
+        android:id="@+id/activity_main_programmatically_load"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint="Are you interested" />
+
+    <com.ritesh.customfieldviews.CustomDateView
+        android:id="@+id/activity_main_date_of_birth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint="Date of birth" />
+
+    <com.ritesh.customfieldviews.CustomTextView
+        android:id="@+id/activity_main_text_async_check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        app:hint="Type in 'Hello'" />
+</LinearLayout>

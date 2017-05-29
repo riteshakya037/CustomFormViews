@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Custom Field Views</string>
+    <string name="hint_text">Hint Text</string>
+</resources>
