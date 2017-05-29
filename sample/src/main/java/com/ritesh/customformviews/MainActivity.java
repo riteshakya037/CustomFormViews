@@ -15,17 +15,22 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements MainPresenterView, MainPresenterMapper {
 
-
+    // Basic implementation
     @BindView(R.id.activity_main_text_email)
     CustomTextView emailView;
+    // Implementation on Async Callbacks
     @BindView(R.id.activity_main_text_async_check)
     CustomTextView textAscync;
+    // Implementation with use of resource file for list
     @BindView(R.id.activity_main_number_of_dependents)
     CustomSpinnerView noOdDependents;
+    // Implementation with programmatically loaded data
     @BindView(R.id.activity_main_programmatically_load)
     CustomSpinnerView programmaticallyLoad;
+    // Basic Implementation
     @BindView(R.id.activity_main_date_of_birth)
     CustomDateView dateOfBirth;
+    // Next button to show everything is valid.
     @BindView(R.id.activity_main_text_validity_button)
     Button validityButton;
     private MainPresenter mPresenter;
@@ -37,7 +42,9 @@ public class MainActivity extends AppCompatActivity implements MainPresenterView
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         mPresenter = new MainPresenterImpl(this, this);
+        // Add a output listener and array of all Custom views to validator.
         mPresenter.addValidators(mPresenter, emailView, textAscync, noOdDependents, programmaticallyLoad, dateOfBirth);
+        // Add data to CustomSpinnerView programmatically
         mPresenter.setData();
     }
 
@@ -46,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements MainPresenterView
         return this;
     }
 
+    /**
+     * @param allValid {@code true} if all the calidators are positive. {@code false} Otherwise.
+     */
     @Override
     public void setNextButton(boolean allValid) {
         validityButton.setVisibility(allValid ? View.VISIBLE : View.GONE);
