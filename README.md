@@ -5,7 +5,7 @@ Clean Form Views
 
 <img src="screenshots/Header.png?raw=true" width="600" height="356">
 
-A clean collection of views used for forms.
+A clean collection of views used for forms with excellent support for individual and combined validity.
 
 Demo
 ===========================
