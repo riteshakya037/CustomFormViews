@@ -38,15 +38,6 @@ Installation
 Gradle
 
 ```
-repositories {
-    maven {
-        url  "http://dl.bintray.com/riteshakya037/maven" 
-    }
-}
-        
-```
-
-```
 dependencies {
     compile 'com.ritesh:customfieldviews:1.0.0'
 }
