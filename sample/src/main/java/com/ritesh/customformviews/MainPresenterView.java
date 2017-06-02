@@ -8,6 +8,4 @@ import android.content.Context;
 
 interface MainPresenterView {
     Context getContext();
-
-    void setNextButton(boolean allValid);
 }

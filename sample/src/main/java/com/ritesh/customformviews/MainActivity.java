@@ -9,11 +9,12 @@ import android.widget.Button;
 import com.ritesh.customfieldviews.CustomDateView;
 import com.ritesh.customfieldviews.CustomSpinnerView;
 import com.ritesh.customfieldviews.CustomTextView;
+import com.ritesh.customfieldviews.validators.OutputListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainPresenterView, MainPresenterMapper {
+public class MainActivity extends AppCompatActivity implements MainPresenterView, MainPresenterMapper, OutputListener {
 
     // Basic implementation
     @BindView(R.id.activity_main_text_email)
@@ -42,8 +43,8 @@ public class MainActivity extends AppCompatActivity implements MainPresenterView
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         mPresenter = new MainPresenterImpl(this, this);
-        // Add a output listener and array of all Custom views to validator.
-        mPresenter.addValidators(mPresenter, emailView, textAscync, noOdDependents, programmaticallyLoad, dateOfBirth);
+        // Bind this to ValidityBase
+        mPresenter.bind(this);
         // Add data to CustomSpinnerView programmatically
         mPresenter.setData();
     }
@@ -57,7 +58,8 @@ public class MainActivity extends AppCompatActivity implements MainPresenterView
      * @param allValid {@code true} if all the calidators are positive. {@code false} Otherwise.
      */
     @Override
-    public void setNextButton(boolean allValid) {
+    public void finalValidity(boolean allValid) {
         validityButton.setVisibility(allValid ? View.VISIBLE : View.GONE);
+
     }
 }

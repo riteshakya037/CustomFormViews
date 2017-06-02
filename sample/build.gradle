@@ -1,9 +1,5 @@
 apply plugin: 'com.android.application'
-repositories {
-    maven {
-        url  "http://dl.bintray.com/riteshakya037/maven"
-    }
-}
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
@@ -32,6 +28,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.jakewharton:butterknife:8.6.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
-    compile 'com.ritesh:customfieldviews:1.0.0'
+    compile 'com.ritesh:customfieldviews:1.1.0'
+//    compile project(path: ':customfieldviews')
     testCompile 'junit:junit:4.12'
 }

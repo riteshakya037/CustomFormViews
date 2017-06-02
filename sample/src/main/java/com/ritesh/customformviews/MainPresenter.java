@@ -7,6 +7,6 @@ import com.ritesh.customfieldviews.validators.ValidityListener;
  * Created by Ritesh on 0029, May 29, 2017.
  */
 
-interface MainPresenter extends OutputListener, ValidityListener {
+interface MainPresenter extends ValidityListener {
     void setData();
 }

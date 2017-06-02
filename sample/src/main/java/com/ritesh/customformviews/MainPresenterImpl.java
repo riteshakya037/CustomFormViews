@@ -7,7 +7,6 @@ import com.ritesh.customfieldviews.CustomDateView;
 import com.ritesh.customfieldviews.CustomSpinnerView;
 import com.ritesh.customfieldviews.CustomTextView;
 import com.ritesh.customfieldviews.models.BaseSpinner;
-import com.ritesh.customfieldviews.validators.OutputListener;
 import com.ritesh.customfieldviews.validators.ServerListener;
 import com.ritesh.customfieldviews.validators.ValidityClassBase;
 
@@ -20,7 +19,7 @@ import java.util.regex.Pattern;
  * Created by Ritesh on 0029, May 29, 2017.
  */
 
-class MainPresenterImpl extends ValidityClassBase implements CustomTextView.FocusListener, CustomSpinnerView.SpinnerListener<BaseSpinner>, CustomDateView.SelectionListener, OutputListener, MainPresenter, CustomTextView.ServerValidator {
+class MainPresenterImpl extends ValidityClassBase implements CustomTextView.FocusListener, CustomSpinnerView.SpinnerListener<BaseSpinner>, CustomDateView.SelectionListener, MainPresenter, CustomTextView.ServerValidator {
     private final MainPresenterView mView;
     private final MainPresenterMapper mMapper;
 
@@ -138,16 +137,6 @@ class MainPresenterImpl extends ValidityClassBase implements CustomTextView.Focu
                 return today.getTime().getTime();
         }
         return 0;
-    }
-
-    /**
-     * Called every time we change value in one of the ValidityViews.
-     *
-     * @param allValid {@code true} if all the validators are positive. {@code false} Otherwise.
-     */
-    @Override
-    public void finalValidity(boolean allValid) {
-        mView.setNextButton(allValid);
     }
 
     /**
