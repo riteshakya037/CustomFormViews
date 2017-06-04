@@ -1,4 +1,4 @@
-![Download](https://api.bintray.com/packages/riteshakya037/maven/customfieldviews/images/download.svg) ](https://bintray.com/riteshakya037/maven/customfieldviews/_latestVersion)
+[![Download](https://api.bintray.com/packages/riteshakya037/maven/customfieldviews/images/download.svg) ](https://bintray.com/riteshakya037/maven/customfieldviews/_latestVersion)
 
 Clean Form Views
 ==============================
