@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.ritesh.customfieldviews.commons.StringUtils;
 import com.ritesh.customfieldviews.validators.ServerListener;
 import com.ritesh.customfieldviews.validators.ValidityBase;
 import com.ritesh.customfieldviews.validators.ValidityListener;
@@ -91,7 +90,7 @@ public class CustomTextView extends LinearLayout implements ValidityBase, Server
         txtHintLayout.setVisibility(condition ? VISIBLE : GONE);
         validityIcon.setVisibility(!TextUtils.isEmpty(inputEditText.getText().toString()) && !checkServerContinuously ? VISIBLE : GONE);
         inputEditText.setHint(condition ? "" : txtHint.getText());
-        if (!hasFocus && StringUtils.isNull(inputEditText.getText().toString())) {
+        if (!hasFocus && TextUtils.isEmpty(inputEditText.getText().toString())) {
             clearing = true;
             reset();
         }
@@ -124,28 +123,21 @@ public class CustomTextView extends LinearLayout implements ValidityBase, Server
     private void init(Context context, String hint, String text, int inputType, boolean editable, boolean password) {
         mHint = hint;
         View rootView = getView(context);
-        if (!isInEditMode()) {
-            ButterKnife.bind(this, rootView);
-
-            if (txtHint != null)
-                txtHint.setText(hint);
-            if (txtHintLayout != null)
-                txtHintLayout.setVisibility(GONE);
-            if (inputEditText != null) {
-                inputEditText.setHint(hint);
-                inputEditText.setEnabled(editable);
-                inputEditText.setText(text);
-                if (password) {
-                    inputEditText.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-                    inputEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                } else {
-                    inputEditText.setInputType(inputType);
-                }
-            }
+        ButterKnife.bind(this, rootView);
+        txtHint.setText(hint);
+        txtHintLayout.setVisibility(GONE);
+        inputEditText.setHint(hint);
+        inputEditText.setEnabled(editable);
+        inputEditText.setText(text);
+        if (password) {
+            inputEditText.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+            inputEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        } else {
+            inputEditText.setInputType(inputType);
         }
     }
 
-    View getView(Context context) {
+    private View getView(Context context) {
         return inflate(context, R.layout.custom_text_view, this);
     }
 

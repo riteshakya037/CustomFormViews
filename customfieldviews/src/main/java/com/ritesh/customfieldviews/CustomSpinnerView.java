@@ -2,7 +2,6 @@ package com.ritesh.customfieldviews;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -35,10 +34,8 @@ public class CustomSpinnerView extends LinearLayout implements ValidityBase {
     protected ViewGroup txtHintLayout;
     @BindView(R2.id.custom_spinner_view_text_hint)
     protected TextView txtHint;
-
-    @Nullable
     @BindView(R2.id.custom_spinner_view_spinner_main)
-    Spinner mSpinner;
+    protected Spinner mSpinner;
     private Context mContext;
     private String mHint;
     private List<BaseSpinner> mData = new ArrayList<>();
