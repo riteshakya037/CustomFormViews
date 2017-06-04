@@ -18,22 +18,22 @@ public class MainActivity extends AppCompatActivity implements MainPresenterView
 
     // Basic implementation
     @BindView(R.id.activity_main_text_email)
-    CustomTextView emailView;
+    protected CustomTextView emailView;
     // Implementation on Async Callbacks
     @BindView(R.id.activity_main_text_async_check)
-    CustomTextView textAscync;
+    protected CustomTextView textAscync;
     // Implementation with use of resource file for list
     @BindView(R.id.activity_main_number_of_dependents)
-    CustomSpinnerView noOdDependents;
+    protected CustomSpinnerView noOdDependents;
     // Implementation with programmatically loaded data
     @BindView(R.id.activity_main_programmatically_load)
-    CustomSpinnerView programmaticallyLoad;
+    protected CustomSpinnerView programmaticallyLoad;
     // Basic Implementation
     @BindView(R.id.activity_main_date_of_birth)
-    CustomDateView dateOfBirth;
+    protected CustomDateView dateOfBirth;
     // Next button to show everything is valid.
     @BindView(R.id.activity_main_text_validity_button)
-    Button validityButton;
+    protected Button validityButton;
     private MainPresenter mPresenter;
 
 

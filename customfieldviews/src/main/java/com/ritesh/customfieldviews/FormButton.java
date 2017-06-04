@@ -3,7 +3,6 @@ package com.ritesh.customfieldviews;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,10 +17,8 @@ import butterknife.ButterKnife;
 
 public class FormButton extends RelativeLayout {
 
-    @Nullable
-    @SuppressWarnings("WeakerAccess")
     @BindView(R2.id.custom_form_button_button_icon)
-    ImageView separatorIcon;
+    protected ImageView separatorIcon;
 
     public FormButton(Context context) {
         super(context);

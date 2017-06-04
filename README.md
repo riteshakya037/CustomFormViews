@@ -47,7 +47,7 @@ Gradle
 
 ```
 dependencies {
-    compile 'com.ritesh:customfieldviews:1.1.0'
+    compile 'com.ritesh:customfieldviews:1.3.1'
 }
 ```
 
@@ -95,7 +95,7 @@ Future Works
 ===========================
 
 * Add support for customization
-* Add tranisition animations
+* Add transition animations
 
 Libraries Used
 ===========================
@@ -125,8 +125,10 @@ Contrbute
 
 ## Changelog
 
-+   **1.1.0** : Create library
-+   **1.1.0** : Removed redundany while initializing form views.
++   **1.0.0** : Create library
++   **1.1.0** : Removed redundancy while initializing form views.
++   **1.2.0** : Added option to set minimum date to custom text view.
++   **1.3.1** : Removed redundancy while initializing callbacks.
 
 Contact me
 ===========================

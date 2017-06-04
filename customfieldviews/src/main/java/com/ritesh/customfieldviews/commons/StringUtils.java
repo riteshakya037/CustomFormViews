@@ -1,7 +1,7 @@
 package com.ritesh.customfieldviews.commons;
 
 /**
- * Created by Ritesh on 0029, May 29, 2017.
+ * @author Ritesh Shakya
  */
 
 public class StringUtils {
@@ -10,11 +10,12 @@ public class StringUtils {
     }
 
     public static boolean isNull(String field) {
-        if (field == null)
+        String tempField = field;
+        if (tempField == null)
             return true;
         else
-            field = field.trim();
+            tempField = field.trim();
 
-        return (field.equalsIgnoreCase("NULL") || field.equalsIgnoreCase("") || field.isEmpty());
+        return (tempField.equalsIgnoreCase("NULL") || tempField.equalsIgnoreCase("") || tempField.isEmpty());
     }
 }

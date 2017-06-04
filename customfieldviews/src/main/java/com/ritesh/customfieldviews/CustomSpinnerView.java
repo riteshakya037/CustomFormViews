@@ -31,13 +31,10 @@ import butterknife.Optional;
  */
 @SuppressWarnings("WeakerAccess")
 public class CustomSpinnerView extends LinearLayout implements ValidityBase {
-    @Nullable
     @BindView(R2.id.custom_spinner_view_text_hint_layout)
-    ViewGroup txtHintLayout;
-
-    @Nullable
+    protected ViewGroup txtHintLayout;
     @BindView(R2.id.custom_spinner_view_text_hint)
-    TextView txtHint;
+    protected TextView txtHint;
 
     @Nullable
     @BindView(R2.id.custom_spinner_view_spinner_main)
@@ -66,7 +63,7 @@ public class CustomSpinnerView extends LinearLayout implements ValidityBase {
 
     @Optional
     @OnClick(R2.id.custom_spinner_view_root_view)
-    void onClickDrop() {
+    protected void onClickDrop() {
         if (mSpinner != null) {
             mSpinner.performClick();
         }
@@ -74,12 +71,12 @@ public class CustomSpinnerView extends LinearLayout implements ValidityBase {
 
     @Optional
     @OnItemSelected(R2.id.custom_spinner_view_spinner_main)
-    void onItemSelected(int position) {
+    protected void onItemSelected(int position) {
         if (position > 0 && txtHintLayout != null) {
             mValidity = true;
             txtHintLayout.setVisibility(VISIBLE);
             if (mListener != null)
-                mListener.getData(CustomSpinnerView.this, mData.get(position - 1));
+                mListener.getSpinnerValidity(CustomSpinnerView.this, mData.get(position - 1));
             if (mValidityListener != null)
                 mValidityListener.checkValidity();
         }
@@ -150,6 +147,6 @@ public class CustomSpinnerView extends LinearLayout implements ValidityBase {
     }
 
     public interface SpinnerListener<T extends BaseSpinner> {
-        void getData(CustomSpinnerView view, T baseSpinner);
+        void getSpinnerValidity(CustomSpinnerView view, T baseSpinner);
     }
 }

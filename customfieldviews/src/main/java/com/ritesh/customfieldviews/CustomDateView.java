@@ -3,7 +3,6 @@ package com.ritesh.customfieldviews;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -36,18 +35,14 @@ import butterknife.Optional;
 @SuppressWarnings({"WeakerAccess", "ConstantConditions"})
 public class CustomDateView extends LinearLayout implements ValidityBase {
     private final Context mContext;
-    @Nullable
     @BindView(R2.id.custom_date_view_validity_icon)
     public ImageView validityIcon;
-    @Nullable
     @BindView(R2.id.custom_date_view_text_hint_layout)
-    ViewGroup txtHintLayout;
-    @Nullable
+    protected ViewGroup txtHintLayout;
     @BindView(R2.id.custom_date_view_text_hint)
-    TextView txtHint;
-    @Nullable
+    protected TextView txtHint;
     @BindView(R2.id.custom_date_view_text_main)
-    TextView dateText;
+    protected TextView dateText;
     private String mTitle;
     private SelectionListener mListener;
     private ValidityListener mValidityListener;
@@ -72,7 +67,7 @@ public class CustomDateView extends LinearLayout implements ValidityBase {
 
     @Optional
     @OnClick(R2.id.custom_date_view_text_main)
-    void onClick() {
+    protected void onClick() {
         final Calendar calendar = new GregorianCalendar();
         DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -82,7 +77,7 @@ public class CustomDateView extends LinearLayout implements ValidityBase {
                 SimpleDateFormat format1 = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
                 dateText.setText(format1.format(calendar.getTime()));
                 if (mListener != null) {
-                    mValidity = mListener.setDate(CustomDateView.this, calendar);
+                    mValidity = mListener.getDateValidity(CustomDateView.this, calendar);
                     validityIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), mValidity ? R.drawable.ic_check_green : R.drawable.ic_error));
                 }
                 if (mValidityListener != null)
@@ -90,7 +85,10 @@ public class CustomDateView extends LinearLayout implements ValidityBase {
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         if (mListener != null) {
-            datePickerDialog.getDatePicker().setMaxDate(mListener.getMaxDate(this));
+            if (mListener.setMaxDate(this) != 0)
+                datePickerDialog.getDatePicker().setMaxDate(mListener.setMaxDate(this));
+            if (mListener.setMinDate(this) != 0)
+                datePickerDialog.getDatePicker().setMinDate(mListener.setMinDate(this));
         }
         datePickerDialog.setTitle(mTitle);
         datePickerDialog.show();
@@ -116,22 +114,22 @@ public class CustomDateView extends LinearLayout implements ValidityBase {
     }
 
     @SuppressWarnings("ConstantConditions")
-    public void setValue(String date_of_birth) {
-        if (!TextUtils.isEmpty(date_of_birth)) {
+    public void setValue(String dateText) {
+        if (!TextUtils.isEmpty(dateText)) {
             txtHintLayout.setVisibility(VISIBLE);
             if (mListener != null) {
                 DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                 Date date = new Date();
                 try {
-                    date = formatter.parse(date_of_birth);
+                    date = formatter.parse(dateText);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(date);
-                mValidity = mListener.setDate(this, calendar);
+                mValidity = mListener.getDateValidity(this, calendar);
                 SimpleDateFormat format1 = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-                dateText.setText(format1.format(calendar.getTime()));
+                this.dateText.setText(format1.format(calendar.getTime()));
                 validityIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), mValidity ? R.drawable.ic_check_green : R.drawable.ic_error));
             }
         }
@@ -147,8 +145,10 @@ public class CustomDateView extends LinearLayout implements ValidityBase {
     }
 
     public interface SelectionListener {
-        boolean setDate(CustomDateView view, Calendar date);
+        boolean getDateValidity(CustomDateView view, Calendar date);
 
-        long getMaxDate(CustomDateView view);
+        long setMaxDate(CustomDateView view);
+
+        long setMinDate(CustomDateView view);
     }
 }

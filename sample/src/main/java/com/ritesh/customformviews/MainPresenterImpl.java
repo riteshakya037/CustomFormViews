@@ -16,10 +16,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by Ritesh on 0029, May 29, 2017.
+ * @author Ritesh Shakya
  */
 
-class MainPresenterImpl extends ValidityClassBase implements CustomTextView.FocusListener, CustomSpinnerView.SpinnerListener<BaseSpinner>, CustomDateView.SelectionListener, MainPresenter, CustomTextView.ServerValidator {
+class MainPresenterImpl extends ValidityClassBase implements MainPresenter {
     private final MainPresenterView mView;
     private final MainPresenterMapper mMapper;
 
@@ -30,45 +30,12 @@ class MainPresenterImpl extends ValidityClassBase implements CustomTextView.Focu
     }
 
     /**
-     * Enable TextChange listener for CustomTextViews*
-     */
-    @Override
-    protected CustomTextView.FocusListener getFocusListener() {
-        return this;
-    }
-
-    /**
-     * Enable ServerValidator listener for CustomTextViews*
-     */
-    @Override
-    protected CustomTextView.ServerValidator getServerValidator() {
-        return this;
-    }
-
-    /**
-     * Enable Spinner selection listener for CustomTextViews*
-     */
-    @Override
-    protected CustomSpinnerView.SpinnerListener<BaseSpinner> getSpinnerListener() {
-        return this;
-    }
-
-    /**
-     * Enable DatePicker selection listener for CustomTextViews*
-     */
-    @Override
-    protected CustomDateView.SelectionListener getSelectionListener() {
-        return this;
-    }
-
-
-    /**
      * @param view Returns the calling view.
      * @param text Text enter in the textView.
      * @return {@code true} if the entered text is valid. {@code false} Otherwise.
      */
     @Override
-    public boolean checkValidity(CustomTextView view, String text) {
+    public boolean getTextValidity(CustomTextView view, String text) {
         switch (view.getId()) {
             case R.id.activity_main_text_email:
                 // Check with email pattern and return validity
@@ -77,7 +44,7 @@ class MainPresenterImpl extends ValidityClassBase implements CustomTextView.Focu
                 Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(text);
                 return matcher.matches();
             case R.id.activity_main_text_async_check:
-                // If length is equal of greater than 5 check with server. {@link CustomTextView#validateFromServer}
+                // If length is equal of greater than 5 check with server. {@link CustomTextView#checkValidateFromServer}
                 if (text.length() >= 5) {
                     view.checkValidityWithServer();
                 }
@@ -93,7 +60,7 @@ class MainPresenterImpl extends ValidityClassBase implements CustomTextView.Focu
      * @param baseSpinner Current selection of SpinnerView.
      */
     @Override
-    public void getData(CustomSpinnerView view, BaseSpinner baseSpinner) {
+    public void getSpinnerValidity(CustomSpinnerView view, BaseSpinner baseSpinner) {
         switch (view.getId()) {
             case R.id.activity_main_programmatically_load:
                 System.out.println("Current Programmatically Selection: " + baseSpinner.name);
@@ -112,7 +79,7 @@ class MainPresenterImpl extends ValidityClassBase implements CustomTextView.Focu
      * @return {@code true} if the selected date is valid. {@code false} Otherwise.
      */
     @Override
-    public boolean setDate(CustomDateView view, Calendar date) {
+    public boolean getDateValidity(CustomDateView view, Calendar date) {
         switch (view.getId()) {
             case R.id.activity_main_date_of_birth:
                 Calendar today = Calendar.getInstance();
@@ -129,11 +96,22 @@ class MainPresenterImpl extends ValidityClassBase implements CustomTextView.Focu
      * @return Maximum date to display.
      */
     @Override
-    public long getMaxDate(CustomDateView view) {
+    public long setMaxDate(CustomDateView view) {
         switch (view.getId()) {
             case R.id.activity_main_date_of_birth:
                 Calendar today = Calendar.getInstance();
                 today.add(Calendar.YEAR, -18);
+                return today.getTime().getTime();
+        }
+        return 0;
+    }
+
+    @Override
+    public long setMinDate(CustomDateView view) {
+        switch (view.getId()) {
+            case R.id.activity_main_date_of_birth:
+                Calendar today = Calendar.getInstance();
+                today.add(Calendar.YEAR, -60);
                 return today.getTime().getTime();
         }
         return 0;
@@ -145,7 +123,7 @@ class MainPresenterImpl extends ValidityClassBase implements CustomTextView.Focu
      * @param listener {@link ServerListener} to provide asynchronous completion of task.
      */
     @Override
-    public void validateFromServer(View view, final String text, final ServerListener listener) {
+    public void checkValidateFromServer(View view, final String text, final ServerListener listener) {
         switch (view.getId()) {
             case R.id.activity_main_text_async_check:
                 // Your Asynchronous code here
@@ -167,7 +145,7 @@ class MainPresenterImpl extends ValidityClassBase implements CustomTextView.Focu
      * @return {@link CustomTextView.Properties} to set default and error texts.
      */
     @Override
-    public CustomTextView.Properties getProperties(CustomTextView view) {
+    public CustomTextView.Properties getTextErrorProperties(CustomTextView view) {
         switch (view.getId()) {
             case R.id.activity_main_text_async_check:
                 return new CustomTextView.Properties("Please enter \"Hello\" exactly as it is",
@@ -181,7 +159,7 @@ class MainPresenterImpl extends ValidityClassBase implements CustomTextView.Focu
      */
     @Override
     public void setData() {
-        ((CustomSpinnerView) getView(R.id.activity_main_programmatically_load)).setData(new ArrayList<>(new ArrayList<BaseSpinner>() {{
+        getView(R.id.activity_main_programmatically_load, CustomSpinnerView.class).setData(new ArrayList<>(new ArrayList<BaseSpinner>() {{
             add(new BaseSpinner("Yes"));
             add(new BaseSpinner("No"));
         }}));

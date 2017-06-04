@@ -3,7 +3,6 @@ package com.ritesh.customfieldviews;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -26,7 +25,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
-import butterknife.Optional;
 
 
 /**
@@ -34,23 +32,22 @@ import butterknife.Optional;
  */
 public class CustomTextView extends LinearLayout implements ValidityBase, ServerListener {
     @BindView(R2.id.custom_text_view_text_hint_layout)
-    ViewGroup txtHintLayout;
+    protected ViewGroup txtHintLayout;
     @BindView(R2.id.custom_text_view_validity_icon)
-    ImageView validityIcon;
+    protected ImageView validityIcon;
     @BindView(R2.id.custom_text_view_validity_animation)
-    AVLoadingIndicatorView validityAnimation;
+    protected AVLoadingIndicatorView validityAnimation;
     @BindView(R2.id.custom_text_view_text_hint)
-    TextView txtHint;
+    protected TextView txtHint;
     @BindView(R2.id.custom_text_view_error_view)
-    TextView errorView;
+    protected TextView errorView;
     @BindView(R2.id.custom_text_view_text_main)
-    EditText inputEditText;
+    protected EditText inputEditText;
 
     private FocusListener mListener;
     private ValidityListener mValidityListener;
     private ServerValidator mServerValidator;
     private boolean validity;
-    private String text;
     private boolean dontCallback = false;
     private String mHint;
     private boolean checkServerContinuously = false;
@@ -71,11 +68,10 @@ public class CustomTextView extends LinearLayout implements ValidityBase, Server
 
     }
 
-    @Nullable
     @OnTextChanged(value = R2.id.custom_text_view_text_main, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    public void nameChanged(CharSequence text) {
+    protected void nameChanged(CharSequence text) {
         if (mListener != null && !dontCallback && !clearing) {
-            validity = mListener.checkValidity(CustomTextView.this, text.toString());
+            validity = mListener.getTextValidity(CustomTextView.this, text.toString());
             validityIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), validity ? R.drawable.ic_check_green : R.drawable.ic_error));
         }
         if (mValidityListener != null) {
@@ -89,31 +85,27 @@ public class CustomTextView extends LinearLayout implements ValidityBase, Server
         clearing = false;
     }
 
-    @Optional
-    @SuppressWarnings("ResourceType")
     @OnFocusChange(R2.id.custom_text_view_text_main)
-    void inputFocusChanged(boolean hasFocus) {
+    protected void inputFocusChanged(boolean hasFocus) {
         boolean condition = hasFocus || !TextUtils.isEmpty(inputEditText.getText());
         txtHintLayout.setVisibility(condition ? VISIBLE : GONE);
         validityIcon.setVisibility(!TextUtils.isEmpty(inputEditText.getText().toString()) && !checkServerContinuously ? VISIBLE : GONE);
         inputEditText.setHint(condition ? "" : txtHint.getText());
-        if (!hasFocus) {
-            if (StringUtils.isNull(inputEditText.getText().toString())) {
-                clearing = true;
-                reset();
-            }
+        if (!hasFocus && StringUtils.isNull(inputEditText.getText().toString())) {
+            clearing = true;
+            reset();
         }
     }
 
     public void checkValidityWithServer() {
-        mServerValidator.validateFromServer(CustomTextView.this, inputEditText.getText().toString(), this);
+        mServerValidator.checkValidateFromServer(CustomTextView.this, inputEditText.getText().toString(), this);
         validityIcon.setVisibility(GONE);
         validityAnimation.setVisibility(VISIBLE);
         checkServerContinuously = true;
     }
 
     private void showValidityResponse() {
-        Properties properties = mServerValidator.getProperties(CustomTextView.this);
+        Properties properties = mServerValidator.getTextErrorProperties(CustomTextView.this);
         if (!validity) {
             errorView.setVisibility(VISIBLE);
             errorView.setTextColor(Color.parseColor("#e03d46"));
@@ -197,10 +189,6 @@ public class CustomTextView extends LinearLayout implements ValidityBase, Server
             mValidityListener.checkValidity();
     }
 
-    private void setPositionLast() {
-        inputEditText.setSelection(inputEditText.getText().length());
-    }
-
     private void reset() {
         inputEditText.setText("");
         inputEditText.setHint(mHint);
@@ -231,19 +219,19 @@ public class CustomTextView extends LinearLayout implements ValidityBase, Server
     }
 
     public interface FocusListener {
-        boolean checkValidity(CustomTextView view, String text);
+        boolean getTextValidity(CustomTextView view, String text);
 
     }
 
     public interface ServerValidator {
-        void validateFromServer(View view, String text, ServerListener listener);
+        void checkValidateFromServer(View view, String text, ServerListener listener);
 
-        CustomTextView.Properties getProperties(CustomTextView view);
+        CustomTextView.Properties getTextErrorProperties(CustomTextView view);
     }
 
     public static class Properties {
-        String errorMessage;
-        String nonErrorMessage;
+        private String errorMessage;
+        private String nonErrorMessage;
 
         public Properties(String errorMessage, String nonErrorMessage) {
             this.errorMessage = errorMessage;
@@ -251,11 +239,11 @@ public class CustomTextView extends LinearLayout implements ValidityBase, Server
         }
 
 
-        String getNonErrorMessage() {
+        private String getNonErrorMessage() {
             return nonErrorMessage;
         }
 
-        String getErrorMessage() {
+        private String getErrorMessage() {
             return errorMessage;
         }
     }

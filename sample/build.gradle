@@ -28,7 +28,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.jakewharton:butterknife:8.6.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
-    compile 'com.ritesh:customfieldviews:1.1.0'
+    compile 'com.ritesh:customfieldviews:1.3.1'
 //    compile project(path: ':customfieldviews')
     testCompile 'junit:junit:4.12'
 }
