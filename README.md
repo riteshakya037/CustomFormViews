@@ -1,7 +1,12 @@
 [![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16)
+[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
+[![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
 [![Download](https://api.bintray.com/packages/riteshakya037/maven/customfieldviews/images/download.svg) ](https://bintray.com/riteshakya037/maven/customfieldviews/_latestVersion)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d55a8a3218d54c2fb2f58d5f7a784999)](https://www.codacy.com/app/riteshakya037/CustomFormViews?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=riteshakya037/CustomFormViews&amp;utm_campaign=Badge_Grade)
 
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d55a8a3218d54c2fb2f58d5f7a784999)](https://www.codacy.com/app/riteshakya037/CustomFormViews?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=riteshakya037/CustomFormViews&amp;utm_campaign=Badge_Grade)
+[![Code Climate](https://codeclimate.com/github/riteshakya037/CustomFormViews/badges/gpa.svg)](https://codeclimate.com/github/riteshakya037/CustomFormViews)
+[![Issue Count](https://codeclimate.com/github/riteshakya037/CustomFormViews/badges/issue_count.svg)](https://codeclimate.com/github/riteshakya037/CustomFormViews)
 
 Clean Form Views
 ==============================
