@@ -1,5 +1,6 @@
+[![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16)
 [![Download](https://api.bintray.com/packages/riteshakya037/maven/customfieldviews/images/download.svg) ](https://bintray.com/riteshakya037/maven/customfieldviews/_latestVersion)
-
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d55a8a3218d54c2fb2f58d5f7a784999)](https://www.codacy.com/app/riteshakya037/CustomFormViews?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=riteshakya037/CustomFormViews&amp;utm_campaign=Badge_Grade)
 Clean Form Views
 ==============================
 
@@ -94,6 +95,31 @@ Libraries Used
 
 * [Butter Knife](https://github.com/JakeWharton/butterknife) - View Injection Library
 * [AVLoadingIndicatorView](https://github.com/81813780/AVLoadingIndicatorView) - Collection of nice loading animations for Android.
+
+
+Contrbute
+===========================
+
++   Fork the repo
++   create a branch
+    ```
+    git checkout -b my_branch
+    ```
++   Add your changes
++   Commit your changes:
+    ```
+    git commit -am "Added some awesome stuff"
+    ```
++   Push your branch:
+    ```
+    git push origin my_branch
+    ```
++   Make a pull request to `develop` branch
+
+## Changelog
+
++   **1.1.0** : Create library
++   **1.1.0** : Removed redundany while initializing form views.
 
 Contact me
 ===========================
