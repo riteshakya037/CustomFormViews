@@ -6,5 +6,9 @@ package com.ritesh.customfieldviews.validators;
 public interface ValidityBase {
     boolean getValidity();
 
+    void setValidity(boolean validity);
+
     int getId();
+
+    void reset();
 }

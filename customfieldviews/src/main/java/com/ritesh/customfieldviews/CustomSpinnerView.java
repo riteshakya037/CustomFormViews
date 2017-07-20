@@ -10,32 +10,26 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import com.ritesh.customfieldviews.adaptors.NothingSelectedSpinnerAdapter;
-import com.ritesh.customfieldviews.models.BaseSpinner;
-import com.ritesh.customfieldviews.validators.ValidityBase;
-import com.ritesh.customfieldviews.validators.ValidityListener;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
 import butterknife.Optional;
+import com.ritesh.customfieldviews.adaptors.NothingSelectedSpinnerAdapter;
+import com.ritesh.customfieldviews.models.BaseSpinner;
+import com.ritesh.customfieldviews.validators.ValidityBase;
+import com.ritesh.customfieldviews.validators.ValidityListener;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Ritesh Shakya
  */
-@SuppressWarnings("WeakerAccess")
-public class CustomSpinnerView extends LinearLayout implements ValidityBase {
-    @BindView(R2.id.custom_spinner_view_text_hint_layout)
-    protected ViewGroup txtHintLayout;
-    @BindView(R2.id.custom_spinner_view_text_hint)
-    protected TextView txtHint;
-    @BindView(R2.id.custom_spinner_view_spinner_main)
-    protected Spinner mSpinner;
+@SuppressWarnings("WeakerAccess") public class CustomSpinnerView extends LinearLayout
+        implements ValidityBase {
+    @BindView(R2.id.custom_spinner_view_text_hint_layout) protected ViewGroup txtHintLayout;
+    @BindView(R2.id.custom_spinner_view_text_hint) protected TextView txtHint;
+    @BindView(R2.id.custom_spinner_view_spinner_main) protected Spinner mSpinner;
     private Context mContext;
     private String mHint;
     private List<BaseSpinner> mData = new ArrayList<>();
@@ -45,37 +39,32 @@ public class CustomSpinnerView extends LinearLayout implements ValidityBase {
 
     public CustomSpinnerView(Context context) {
         super(context);
-        init(context, "", new CharSequence[]{});
+        init(context, "", new CharSequence[] {});
     }
 
     public CustomSpinnerView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        TypedArray typedArray = getContext().obtainStyledAttributes(
-                attrs,
-                R.styleable.custom_view);
-        init(context, typedArray.getString(R.styleable.custom_view_hint), typedArray.getTextArray(R.styleable.custom_view_android_entries));
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.custom_view);
+        init(context, typedArray.getString(R.styleable.custom_view_hint),
+                typedArray.getTextArray(R.styleable.custom_view_android_entries));
         typedArray.recycle();
-
     }
 
-    @Optional
-    @OnClick(R2.id.custom_spinner_view_root_view)
-    protected void onClickDrop() {
+    @Optional @OnClick(R2.id.custom_spinner_view_root_view) protected void onClickDrop() {
         if (mSpinner != null) {
             mSpinner.performClick();
         }
     }
 
-    @Optional
-    @OnItemSelected(R2.id.custom_spinner_view_spinner_main)
+    @Optional @OnItemSelected(R2.id.custom_spinner_view_spinner_main)
     protected void onItemSelected(int position) {
         if (position > 0 && txtHintLayout != null) {
             mValidity = true;
             txtHintLayout.setVisibility(VISIBLE);
-            if (mListener != null)
+            if (mListener != null) {
                 mListener.getSpinnerValidity(CustomSpinnerView.this, mData.get(position - 1));
-            if (mValidityListener != null)
-                mValidityListener.checkValidity();
+            }
+            if (mValidityListener != null) mValidityListener.checkValidity();
         }
     }
 
@@ -89,38 +78,31 @@ public class CustomSpinnerView extends LinearLayout implements ValidityBase {
         ArrayAdapter<BaseSpinner> adapter;
         if (textArray != null && textArray.length > 0) {
             for (CharSequence sequence : textArray) {
-                mData.add(new BaseSpinner(sequence.toString(), sequence.toString().equals("0") ? "None" : sequence.toString()));
+                mData.add(new BaseSpinner(sequence.toString(),
+                        sequence.toString().equals("0") ? "None" : sequence.toString()));
             }
             adapter = new ArrayAdapter<>(mContext, R.layout.spinner_row_selected, mData);
             adapter.setDropDownViewResource(R.layout.spinner_row_dropdown);
             if (mSpinner != null) {
-                mSpinner.setAdapter(
-                        new NothingSelectedSpinnerAdapter(
-                                adapter,
-                                R.layout.spinner_row_nothing_selected,
-                                context, hint));
+                mSpinner.setAdapter(new NothingSelectedSpinnerAdapter(adapter,
+                        R.layout.spinner_row_nothing_selected, context, hint));
             }
         }
-        if (txtHint != null)
-            txtHint.setText(hint);
-        if (txtHintLayout != null)
-            txtHintLayout.setVisibility(GONE);
+        if (txtHint != null) txtHint.setText(hint);
+        if (txtHintLayout != null) txtHintLayout.setVisibility(GONE);
     }
 
-    @SuppressWarnings("ConstantConditions")
-    public void setData(List<BaseSpinner> data) {
+    @SuppressWarnings("ConstantConditions") public void setData(List<BaseSpinner> data) {
         mData = data;
-        ArrayAdapter<BaseSpinner> adapter = new ArrayAdapter<>(mContext, R.layout.spinner_row_selected, data);
+        ArrayAdapter<BaseSpinner> adapter =
+                new ArrayAdapter<>(mContext, R.layout.spinner_row_selected, data);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinner.setAdapter(
-                new NothingSelectedSpinnerAdapter(
-                        adapter,
-                        R.layout.spinner_row_nothing_selected,
+                new NothingSelectedSpinnerAdapter(adapter, R.layout.spinner_row_nothing_selected,
                         mContext, mHint));
     }
 
-    @SuppressWarnings("ConstantConditions")
-    public void setSelection(String id) {
+    @SuppressWarnings("ConstantConditions") public void setSelection(String id) {
         if (!TextUtils.isEmpty(id) && mData.contains(new BaseSpinner(id, ""))) {
             int pos = mData.indexOf(new BaseSpinner(id, ""));
             mSpinner.setSelection(pos + 1);
@@ -128,19 +110,30 @@ public class CustomSpinnerView extends LinearLayout implements ValidityBase {
         }
     }
 
-    public void addListener(SpinnerListener<BaseSpinner> listener, ValidityListener validityListener) {
+    public void addListener(SpinnerListener<BaseSpinner> listener,
+            ValidityListener validityListener) {
         this.mListener = listener;
         mValidityListener = validityListener;
     }
 
-    @SuppressWarnings("ConstantConditions")
-    public BaseSpinner getValue() {
-        return mSpinner.getSelectedItem() == null ? new BaseSpinner("", "") : (BaseSpinner) (mSpinner.getSelectedItem());
+    @SuppressWarnings("ConstantConditions") public BaseSpinner getValue() {
+        return mSpinner.getSelectedItem() == null ? new BaseSpinner("", "")
+                : (BaseSpinner) (mSpinner.getSelectedItem());
     }
 
-    @Override
-    public boolean getValidity() {
+    @Override public boolean getValidity() {
         return mValidity;
+    }
+
+    @Override public void setValidity(boolean validity) {
+        this.mValidity = validity;
+        if (mValidityListener != null) mValidityListener.checkValidity();
+    }
+
+    @Override public void reset() {
+        mSpinner.setSelection(0);
+        txtHintLayout.setVisibility(GONE);
+        mValidity = false;
     }
 
     public interface SpinnerListener<T extends BaseSpinner> {

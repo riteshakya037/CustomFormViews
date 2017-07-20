@@ -22,11 +22,14 @@ public class NothingSelectedSpinnerAdapter implements SpinnerAdapter, ListAdapte
     private final int nothingSelectedDropdownLayout;
     private final LayoutInflater layoutInflater;
 
-    public NothingSelectedSpinnerAdapter(SpinnerAdapter spinnerAdapter, @SuppressWarnings("SameParameterValue") int nothingSelectedLayout, Context context, String hint) {
+    public NothingSelectedSpinnerAdapter(SpinnerAdapter spinnerAdapter,
+            @SuppressWarnings("SameParameterValue") int nothingSelectedLayout, Context context,
+            String hint) {
         this(spinnerAdapter, nothingSelectedLayout, -1, context, hint);
     }
 
-    private NothingSelectedSpinnerAdapter(SpinnerAdapter spinnerAdapter, int nothingSelectedLayout, int nothingSelectedDropdownLayout, Context context, String hint) {
+    private NothingSelectedSpinnerAdapter(SpinnerAdapter spinnerAdapter, int nothingSelectedLayout,
+            int nothingSelectedDropdownLayout, Context context, String hint) {
         this.adapter = spinnerAdapter;
         this.context = context;
         this.nothingSelectedLayout = nothingSelectedLayout;
@@ -35,8 +38,7 @@ public class NothingSelectedSpinnerAdapter implements SpinnerAdapter, ListAdapte
         layoutInflater = LayoutInflater.from(context);
     }
 
-    @Override
-    public final View getView(int position, View convertView, ViewGroup parent) {
+    @Override public final View getView(int position, View convertView, ViewGroup parent) {
         if (position == 0) {
             return getNothingSelectedView(parent, mHint);
         }
@@ -49,11 +51,10 @@ public class NothingSelectedSpinnerAdapter implements SpinnerAdapter, ListAdapte
         return view;
     }
 
-
-    @Override
-    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+    @Override public View getDropDownView(int position, View convertView, ViewGroup parent) {
         if (position == 0) {
-            return nothingSelectedDropdownLayout == -1 ? new View(context) : getNothingSelectedDropdownView(parent);
+            return nothingSelectedDropdownLayout == -1 ? new View(context)
+                    : getNothingSelectedDropdownView(parent);
         }
         return adapter.getDropDownView(position - EXTRA, null, parent);
     }
@@ -62,60 +63,48 @@ public class NothingSelectedSpinnerAdapter implements SpinnerAdapter, ListAdapte
         return layoutInflater.inflate(nothingSelectedDropdownLayout, parent, false);
     }
 
-    @Override
-    public int getCount() {
+    @Override public int getCount() {
         int count = adapter.getCount();
         return count == 0 ? 0 : count + EXTRA;
     }
 
-    @Override
-    public Object getItem(int position) {
+    @Override public Object getItem(int position) {
         return position == 0 ? null : adapter.getItem(position - EXTRA);
     }
 
-    @Override
-    public int getItemViewType(int position) {
+    @Override public int getItemViewType(int position) {
         return 0;
     }
 
-    @Override
-    public int getViewTypeCount() {
+    @Override public int getViewTypeCount() {
         return 1;
     }
 
-    @Override
-    public long getItemId(int position) {
+    @Override public long getItemId(int position) {
         return position >= EXTRA ? adapter.getItemId(position - EXTRA) : position - EXTRA;
     }
 
-    @Override
-    public boolean hasStableIds() {
+    @Override public boolean hasStableIds() {
         return adapter.hasStableIds();
     }
 
-    @Override
-    public boolean isEmpty() {
+    @Override public boolean isEmpty() {
         return adapter.isEmpty();
     }
 
-    @Override
-    public void registerDataSetObserver(DataSetObserver observer) {
+    @Override public void registerDataSetObserver(DataSetObserver observer) {
         adapter.registerDataSetObserver(observer);
     }
 
-    @Override
-    public void unregisterDataSetObserver(DataSetObserver observer) {
+    @Override public void unregisterDataSetObserver(DataSetObserver observer) {
         adapter.unregisterDataSetObserver(observer);
     }
 
-    @Override
-    public boolean areAllItemsEnabled() {
+    @Override public boolean areAllItemsEnabled() {
         return false;
     }
 
-    @Override
-    public boolean isEnabled(int position) {
+    @Override public boolean isEnabled(int position) {
         return position != 0;
     }
-
 }

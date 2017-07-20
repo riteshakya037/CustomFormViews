@@ -9,13 +9,16 @@ public class StringUtils {
         return !isNull(field);
     }
 
-    public static boolean isNull(String field) {
+    private static boolean isNull(String field) {
         String tempField = field;
-        if (tempField == null)
+        if (tempField == null) {
             return true;
-        else
+        } else {
             tempField = field.trim();
+        }
 
-        return (tempField.equalsIgnoreCase("NULL") || tempField.equalsIgnoreCase("") || tempField.isEmpty());
+        return (tempField.equalsIgnoreCase("NULL")
+                || tempField.equalsIgnoreCase("")
+                || tempField.isEmpty());
     }
 }
